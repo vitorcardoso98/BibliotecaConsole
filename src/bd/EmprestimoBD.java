@@ -18,6 +18,7 @@ public class EmprestimoBD {
         connection = Conexao.getConnection();
     }
 
+    //Método para inserir empréstimo no banco
     public void inserir(Emprestimo emprestimo) {
 
         String sql = "INSERT INTO emprestimos (idUsuario, idLivro, dataEmprestimo, dataDevolucao) VALUES (?,?,?,?)";
@@ -37,7 +38,8 @@ public class EmprestimoBD {
             System.out.println(e);
         }
     }
-
+    
+    //Método que retorna uma lista com todos os empréstimos
     public ArrayList<Emprestimo> getEmprestimos() {
         
         ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
@@ -69,6 +71,7 @@ public class EmprestimoBD {
         return emprestimos;
     }
     
+    //Método que retorna um empréstimo específico de acordo com seu identificador
     public Emprestimo getEmprestimo(int idEmprestimo) {
         
         String sql = "SELECT * FROM emprestimos WHERE idEmprestimo=?";
@@ -99,6 +102,7 @@ public class EmprestimoBD {
         return emprestimo;
     }
     
+    //Método que verifica se um determinado usuário possui empréstimo ativo
     public boolean verificarEmprestimo(int idUsuario) {
         
         String sql = "SELECT * FROM emprestimos WHERE idUsuario=?";
@@ -123,6 +127,7 @@ public class EmprestimoBD {
         return false;
     }
     
+    //Método que exclui um empréstimo quando o mesmo é devolvido pelo usuário
     public void excluir(int idEmprestimo){
         String sql = "DELETE FROM emprestimos WHERE idEmprestimo=?";
 

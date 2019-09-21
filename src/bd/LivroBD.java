@@ -14,9 +14,11 @@ public class LivroBD {
     public LivroBD() {
         connection = Conexao.getConnection();
     }
-
+    
+    //Método para inserir livro no banco
     public void inserir(Livro livro) {
-
+        
+        //Script sql para inserir livro
         String sql = "INSERT INTO livros (titulo, isbn, autor, editora, ano, qtdeExemplares) VALUES (?,?,?,?,?,?)";
 
         try {
@@ -36,7 +38,8 @@ public class LivroBD {
             System.out.println(e);
         }
     }
-
+    
+    //Método que recupera livro do banco pelo ISBN
     public Livro getLivroISBN(String isbn) {
 
         Livro livro = new Livro();
@@ -67,7 +70,8 @@ public class LivroBD {
 
         return livro;
     }
-
+    
+    //Método que recupera um livro por parte do seu título
     public Livro getLivroTitulo(String titulo) {
 
         Livro livro = new Livro();
@@ -98,7 +102,8 @@ public class LivroBD {
 
         return livro;
     }
-
+    
+    //Método que altera a quantidade dos exemplares de acordo com o empréstimo ou devolução
     public void alterar(Livro livro, String opcao) {
 
         if (opcao.equalsIgnoreCase("empréstimo")) {

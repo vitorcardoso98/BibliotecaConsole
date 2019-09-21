@@ -14,7 +14,7 @@ public class UsuarioBD {
         connection = Conexao.getConnection();
     }
     
-    //Método respon´savel por inserir um usuário no banco
+    //Método responsável por inserir um usuário no banco
     public void inserir(Usuario usuario){
         
         //Script sql para inserir um usuário
