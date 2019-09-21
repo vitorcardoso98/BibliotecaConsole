@@ -2,43 +2,80 @@ package principal;
 
 import java.util.Scanner;
 import negocio.LivroNegocio;
+import negocio.UsuarioNegocio;
 
 public class Biblioteca {
 
     public static void main(String[] args) {
 
+        //Instânica da classe LivroNegócio que permite acessar seus métodos
+        LivroNegocio livroNegocio = new LivroNegocio();
+
+        //Instância da classe UsuárioNegocio que permite acessar seus métodos
+        UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+
+        //Objeto Scanner que permite a leitura de dados do teclado
         Scanner leitor = new Scanner(System.in);
 
-        System.out.println("OLÁ, SEJA BEM-VINDO e-Biblioteca");
-        System.out.println("----------MENU----------");
-        System.out.println("1 - CADASTRAR USUÁRIO");
-        System.out.println("2 - CADASTRAR LIVRO");
-        System.out.println("3 - REGISTRAR EMPRÉSTIMO");
-        System.out.println("4 - REGISTRAR DEVOLUÇÃO");
-        System.out.println("5 - CONSULTAR LIVRO PELO ISBN");
-        System.out.println("6 - CONSULTAR LIVRO PELO TÍTULO");
-        System.out.println("7 - SAIR");
+        //Variável para controle das opções do menu
+        int op = 0;
 
-        int opcao = leitor.nextInt();
+        //Laço de repetição do menu
+        do {
+            //Menu
+            System.out.println("OLÁ, SEJA BEM-VINDO ao e-Biblioteca");
+            System.out.println("----------MENU----------");
+            System.out.println("1 - CADASTRAR USUÁRIO");
+            System.out.println("2 - CADASTRAR LIVRO");
+            System.out.println("3 - REGISTRAR EMPRÉSTIMO");
+            System.out.println("4 - REGISTRAR DEVOLUÇÃO");
+            System.out.println("5 - CONSULTAR LIVRO PELO ISBN");
+            System.out.println("6 - CONSULTAR LIVRO PELO TÍTULO");
+            System.out.println("7 - CONSULTAR USUÁRIO PELO CPF");
+            System.out.println("0 - SAIR");
 
-        switch (opcao) {
-            case 1:
-                LivroNegocio livroNegocio = new LivroNegocio();
-                livroNegocio.cadastrarLivro();
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-                      
-        }
+            op = leitor.nextInt();
+
+            switch (op) {
+                case 1:
+                    //Limpando buffer do teclado
+                    leitor.nextLine();
+                    
+                    //Solicita a verificação de CPF do usuário
+                    System.out.println("Digite o cpf do usuário:");
+                    String cpf = leitor.nextLine();
+                    if (usuarioNegocio.verificarUsuarioCPFCadastrado(cpf) == false) {
+                        usuarioNegocio.cadastrarUsuario();
+                    } else {
+                        break;
+                    }
+                case 2:
+                    //Limpando buffer do teclado
+                    leitor.nextLine();
+                    
+                    //Solicita a verificação do ISBN do livro
+                    System.out.println("Digite o ISBN do livro:");
+                    String isbn = leitor.nextLine();
+                    if (livroNegocio.verificarISBNLivroCadastrado(isbn) == false) {
+                        livroNegocio.cadastrarLivro();
+                    } else {
+                        break;
+                    }
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    livroNegocio.consultaLivroISBN();
+                    break;
+                case 6:
+                    livroNegocio.consultaLivroTitulo();
+                    break;
+                case 7:
+                    usuarioNegocio.consultarUsuarioCPF();
+                    break;
+
+            }
+        } while (op != 0);
     }
 }

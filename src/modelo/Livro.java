@@ -2,12 +2,21 @@ package modelo;
 
 public class Livro {
 
+    private int id;
     private String isbn;
     private String titulo;
     private String autor;
     private int ano;
     private String editora;
     private int qtdeExemplares;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String getIsbn() {
         return isbn;

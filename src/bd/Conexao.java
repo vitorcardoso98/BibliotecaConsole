@@ -5,11 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    public Connection getConnection() {
+
+    public static Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
-        } catch (SQLException e) {
+            Class.forName("com.mysql.jdbc.Driver");
+            return DriverManager.getConnection("jdbc:mysql://localhost/biblioteca1", "root", "");
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 }
+

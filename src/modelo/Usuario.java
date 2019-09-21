@@ -2,17 +2,26 @@ package modelo;
 
 public class Usuario {
 
-    private long cpf;
+    private int id;
+    private String cpf;
     private String nome;
     private String telefone;
     private String endereco;
     private String email;
     
-    public long getCpf() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
