@@ -67,14 +67,14 @@ public class LivroBD {
 
         return livro;
     }
-    
+
     public Livro getLivroTitulo(String titulo) {
 
         Livro livro = new Livro();
 
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM livros WHERE titulo LIKE ?");
-            stmt.setString(1, "%"+titulo+"%");
+            stmt.setString(1, "%" + titulo + "%");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -97,5 +97,36 @@ public class LivroBD {
         }
 
         return livro;
+    }
+
+    public void alterar(Livro livro, String opcao) {
+
+        if (opcao.equalsIgnoreCase("empréstimo")) {
+            String sql = "UPDATE livros SET qtdeExemplares = qtdeExemplares-1 WHERE id=?";
+            try {
+                PreparedStatement stmt = connection.prepareStatement(sql);
+
+                stmt.setInt(1, livro.getId());
+
+                stmt.execute();
+                stmt.close();
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }else{
+            String sql = "UPDATE livros SET qtdeExemplares = qtdeExemplares+1 WHERE id=?";
+            try {
+                PreparedStatement stmt = connection.prepareStatement(sql);
+
+                stmt.setInt(1, livro.getId());
+
+                stmt.execute();
+                stmt.close();
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
     }
 }

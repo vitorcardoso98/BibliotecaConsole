@@ -1,6 +1,7 @@
 package principal;
 
 import java.util.Scanner;
+import negocio.EmprestimoNegocio;
 import negocio.LivroNegocio;
 import negocio.UsuarioNegocio;
 
@@ -13,7 +14,9 @@ public class Biblioteca {
 
         //Instância da classe UsuárioNegocio que permite acessar seus métodos
         UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-
+        
+        EmprestimoNegocio emprestimoNegocio = new EmprestimoNegocio();
+        
         //Objeto Scanner que permite a leitura de dados do teclado
         Scanner leitor = new Scanner(System.in);
 
@@ -42,10 +45,11 @@ public class Biblioteca {
                     leitor.nextLine();
                     
                     //Solicita a verificação de CPF do usuário
-                    System.out.println("Digite o cpf do usuário:");
+                    System.out.println("Digite o cpf do usuário para verificação:");
                     String cpf = leitor.nextLine();
                     if (usuarioNegocio.verificarUsuarioCPFCadastrado(cpf) == false) {
                         usuarioNegocio.cadastrarUsuario();
+                        break;
                     } else {
                         break;
                     }
@@ -54,16 +58,28 @@ public class Biblioteca {
                     leitor.nextLine();
                     
                     //Solicita a verificação do ISBN do livro
-                    System.out.println("Digite o ISBN do livro:");
+                    System.out.println("Digite o ISBN do livro para verificação:");
                     String isbn = leitor.nextLine();
                     if (livroNegocio.verificarISBNLivroCadastrado(isbn) == false) {
                         livroNegocio.cadastrarLivro();
+                        break;
                     } else {
                         break;
                     }
                 case 3:
-                    break;
+                    //Limpando buffer do teclado
+                    leitor.nextLine();
+                    
+                    System.out.println("Digite o cpf do usuário para verificação");
+                    String cpf_1 = leitor.nextLine();
+                    if(emprestimoNegocio.verificarUsuarioPossuiEmprestimo(cpf_1)==false){
+                        emprestimoNegocio.registrarEmprestimo();
+                        break;
+                    }else{
+                        break;
+                    }                   
                 case 4:
+                    emprestimoNegocio.registrarDevolucao();
                     break;
                 case 5:
                     livroNegocio.consultaLivroISBN();

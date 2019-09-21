@@ -1,22 +1,29 @@
 package modelo;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Emprestimo {
     
-    private List<Livro> livros;
+    private int id;
+    private Livro livro;
     private Usuario usuario;
     private Calendar dataEmpretimo;
     private Calendar dataDevolucao;
-    
-    public Emprestimo(){
-        this.livros = new ArrayList();
+
+    public int getId() {
+        return id;
     }
-    
-    public void addLivro(Livro livro){
-        livros.add(livro);
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
     }
 
     public Usuario getUsuario() {
